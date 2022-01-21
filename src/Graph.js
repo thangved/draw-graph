@@ -129,8 +129,13 @@ class Graph {
         })
 
         window.addEventListener('mousemove', event => {
+
             if (!this.target)
-                return
+                this.nodes.forEach(e => {
+                    if (Math.abs(e.x - event.clientX) <= this.board.radius)
+                        if (Math.abs(e.y - event.clientY) <= this.board.radius)
+                            this.target = e
+                })
 
             this.shift = event.shiftKey
 
