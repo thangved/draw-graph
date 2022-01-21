@@ -150,6 +150,23 @@ class Graph {
 
         })
     }
+
+    exportMatrix() {
+        const matrix = []
+        const row = []
+        for (let j = 0; j <= this.nodes.length; j++)
+            row.push(0)
+        for (let i = 0; i <= this.nodes.length; i++) {
+            matrix.push([...row])
+        }
+
+        this.edges.forEach(e => {
+            matrix[e.from][e.to]++
+            matrix[e.to][e.from]++
+        })
+
+        return matrix
+    }
 }
 
 export default Graph

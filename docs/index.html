@@ -20,19 +20,45 @@
     <div id="canvas"></div>
 
     <div id="details">
-        <div class="basic">
-            <div class="title">
-                Các cung
-            </div>
-            <div id="edges" class="list-group">
-            </div>
-            <div class="title">
-                <div class="btn btn-primary" id="addNodeButton">
-                    Thêm đỉnh
-                </div>
-                <div class="btn btn-danger" id="removeNodeButton">
+        <div class="basic bg-white p-2">
+            <h2 class="title">
+                <button class="btn btn-danger" id="removeNodeButton">
                     Xóa đỉnh
-                </div>
+                </button>
+            </h2>
+            <h2 class="title">
+                Các cung
+            </h2>
+            <ul id="edges" class="list-group">
+            </ul>
+            <hr />
+            <h2 class="title">
+                Các đỉnh
+            </h2>
+            <ul id="nodes" class="list-group"></ul>
+            <hr />
+            <h2 class="title">
+                Ma trận
+            </h2>
+            <div class="table-responsive">
+                <table class="table table-light" id="matrix">
+                    <thead class="table-dark">
+                    </thead>
+                    <tbody class="table-light">
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+            <div class="bg-light">
+                <h2 class="title">Hướng dẫn</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Nhấn giữ <strong>SHIFT</strong> để vẽ cung
+                    </li>
+                    <li class="list-group-item">
+                        Nhấn đúp để thêm đỉnh
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
