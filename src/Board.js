@@ -33,6 +33,14 @@ class Board {
         this.context.moveTo(x1, y1)
         this.context.lineTo(x2, y2)
         this.context.stroke()
+
+        // const middle = {
+        //     x: (x1 + x2) / 2,
+        //     y: (y1 + y2) / 2,
+        // }
+        // const radius = Math.sqrt(Math.pow(middle.x - x1, 2) + Math.pow(middle.y - y1, 2))
+        // this.context.arc(middle.x, middle.y, radius, 0, 2 * Math.PI)
+        // this.context.stroke()
     }
     clear() {
         this.context.fillStyle = '#fff'

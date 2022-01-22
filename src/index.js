@@ -2,6 +2,9 @@ import Graph from './Graph'
 
 const g = new Graph()
 g.board.appendTo('#canvas')
+g.addNode(1)
+g.addNode(2)
+g.addEdge(1, 2)
 
 function updateData() {
     updateEdges()
