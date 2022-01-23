@@ -26,7 +26,15 @@ function updateEdges() {
             Edge.remove()
         })
         Edge.innerHTML = `<li class="edge list-group-item">
-            ${e.from} đến ${e.to}
+            <span>
+                ${e.from}
+            </span> 
+            <div>
+                <i class="fas fa-long-arrow-alt-right"></i>
+            </div>
+            <span>
+                ${e.to}
+            </span>
         </li>`
         edgesComponent.append(Edge)
 
@@ -41,6 +49,8 @@ function updateTable() {
 
     matrix.forEach((e, i) => th.innerHTML += `<td>${i || 'X'}</td>`)
     thead.innerHTML = ''
+    if (g.nodes.length === 0)
+        return
     thead.append(th)
 
     const tbody = table.querySelector('tbody')
@@ -102,6 +112,9 @@ window.addEventListener('mousedown', event => {
             return
 
     optionsOverlay.remove()
+
+    if (event.buttons === 2)
+        addContextMenu(event)
 })
 
 window.addEventListener('mousemove', event => {
@@ -121,42 +134,42 @@ window.addEventListener('mousemove', event => {
         }
 })
 
-window.addEventListener('contextmenu', event => {
+function addContextMenu(event) {
     event.preventDefault()
     document.getElementById('optionsOverlay')?.remove()
-    if (event.buttons === 2) {
-        const optionsMenu = document.createElement('div')
-        optionsMenu.id = 'optionsOverlay'
-        optionsMenu.className = 'btn-group-vertical'
-        optionsMenu.style = `width: 200px;position: fixed; left: ${event.clientX}px; top: ${event.clientY}px; background: #fff; z-index: 100;border: 1px #ddd solid;border-radius: 5px;box-shadow: 0 0 5px #00000020;`
+    const optionsMenu = document.createElement('div')
+    optionsMenu.id = 'optionsOverlay'
+    optionsMenu.className = 'btn-group-vertical'
+    optionsMenu.style = `width: 200px;position: fixed; left: ${event.clientX}px; top: ${event.clientY}px; background: #fff; z-index: 100;border: 1px #ddd solid;border-radius: 5px;box-shadow: 0 0 5px #00000020;`
 
-        const button = document.createElement('button')
-        button.className = 'btn btn-light'
-        button.innerHTML = 'Thêm đỉnh'
-        button.onclick = event => {
-            const { x, y } = g.board.clientPosition
-            g.addNode(g.nodes.length + 1, x, y)
-        }
-
-        const button1 = document.createElement('button')
-        button1.className = 'btn btn-light'
-        button1.innerHTML = 'Xóa đỉnh'
-        button1.onclick = event => g.removeNode(g.nodes.length)
-
-        const button2 = document.createElement('button')
-        button2.disabled = true
-        button2.className = 'btn btn-light'
-        button2.innerHTML = 'Duyệt theo chiều rộng'
-
-        const button3 = document.createElement('button')
-        button3.disabled = true
-        button3.className = 'btn btn-light'
-        button3.innerHTML = 'Duyệt theo chiều sâu'
-
-        optionsMenu.append(button, button1, button2, button3)
-        document.body.append(optionsMenu)
+    const button = document.createElement('button')
+    button.className = 'btn btn-light'
+    button.innerHTML = 'Thêm đỉnh'
+    button.onclick = event => {
+        const { x, y } = g.board.clientPosition
+        g.addNode(g.nodes.length + 1, x, y)
     }
-})
+
+    const button1 = document.createElement('button')
+    button1.className = 'btn btn-light'
+    button1.innerHTML = 'Xóa đỉnh'
+    button1.onclick = event => g.removeNode(g.nodes.length)
+
+    const button2 = document.createElement('button')
+    button2.disabled = true
+    button2.className = 'btn btn-light'
+    button2.innerHTML = 'Duyệt theo chiều rộng'
+
+    const button3 = document.createElement('button')
+    button3.disabled = true
+    button3.className = 'btn btn-light'
+    button3.innerHTML = 'Duyệt theo chiều sâu'
+
+    optionsMenu.append(button, button1, button2, button3)
+    document.body.append(optionsMenu)
+}
+
+window.addEventListener('contextmenu', addContextMenu)
 
 
 document.getElementById('directedToggle').addEventListener('click', event => {

@@ -47,10 +47,30 @@ body {
 #edges {
     width: 100%;
     .edge {
+        display: flex;
+        padding: 0;
+        overflow: hidden;
+        border-radius: 2px;
         &:hover {
             text-decoration: line-through;
             color: #666;
             cursor: pointer;
+        }
+        div {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            & + span {
+                border-left: 1px solid #ddd;
+                border-right: none;
+            }
+        }
+        span {
+            background: #fdfdfd;
+            color: #000;
+            padding: 5px 20px;
+            border-right: 1px solid #ddd;
         }
     }
 }

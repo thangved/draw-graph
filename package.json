@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "webpack --watch --mode=development",
-    "sass": "sass --watch ./src/styles.scss ./dist/styles.css",
+    "sass": "sass --watch ./src/styles.scss ./docs/styles.css",
     "build": "webpack --mode=production && sass ./src/styles.scss ./docs/styles.css"
   },
   "dependencies": {

@@ -205,6 +205,7 @@ class Graph {
     equalPoint(p1, p2) {
         return Math.abs(p1 - p2) <= this.board.radius
     }
+
 }
 
 export default Graph
