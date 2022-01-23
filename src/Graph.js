@@ -1,25 +1,52 @@
 import Board from './Board'
 
 class Graph {
-    constructor() {
+    constructor(directed) {
         this.board = new Board();
         this.nodes = []
         this.edges = []
-        this.target = null
-        this.drawTo = null
-        this.shift = false
         this.functions = []
+        this.target = null
+        this.directed = directed
+
+        this.init()
+    }
+
+    init() {
+        window.ondblclick = event => {
+            if (this.target)
+                return
+            this.addNode(this.nodes.length + 1, this.board.clientPosition.x, this.board.clientPosition.y)
+        }
+
+        this.board.canvas.addEventListener('mousemove', event => {
+            const { x, y } = this.board.clientPosition
+            document.body.style.cursor = 'unset'
+
+            this.nodes.forEach(e => {
+                if (this.equalPoint(x, e.x) && this.equalPoint(y, e.y))
+                    this.target = this.target || e
+            })
+
+            if (!this.target)
+                return
+            if (this.board.buttons && this.board.shift)
+                document.body.style.cursor = 'move'
+            else
+                document.body.style.cursor = 'pointer'
+            if (this.board.shift || this.board.buttons === 1)
+                return
+            if (!this.equalPoint(x, this.target.x) || !this.equalPoint(y, this.target, y))
+                this.target = null
+        })
 
         this.update()
-        this.board.canvas.addEventListener('dblclick', event => {
-            if (!this.target)
-                this.addNode(this.nodes.length + 1, event.clientX, event.clientY)
-        })
     }
 
     update() {
         this.draw()
         this.checkAddEdge()
+        this.updateNodes()
         setTimeout(() => {
             this.update()
         }, 1000 / 60)
@@ -30,15 +57,14 @@ class Graph {
             x: x || Math.floor(Math.random() * this.board.canvas.width),
             y: y || Math.floor(Math.random() * this.board.canvas.height),
             label,
+            move: 10,
         }
         this.nodes.push(node)
-        this.setEvent()
     }
 
     addEdge(from, to) {
         const edge = { from, to }
         this.edges.push(edge)
-        this.setEvent()
         this.target = null
     }
 
@@ -62,36 +88,72 @@ class Graph {
             this.board.drawNode(node.x, node.y, node.label)
         })
     }
+    updateNodes() {
+        this.nodes = this.nodes.map(e => {
+            if (!this.board.buttons || this.board.shift || !this.target)
+                return this.exchange(e)
+
+            if (this.target.label === e.label)
+                return this.toClientPosition(e)
+
+            return this.exchange(e)
+        })
+    }
+
+    exchange(e) {
+        if (e.move >= 0)
+            return {
+                ...e,
+                x: e.x + 0.1,
+                y: e.y + 0.1,
+                move: e.move - 0.1,
+            }
+        else if (e.move >= -10)
+            return {
+                ...e,
+                x: e.x - 0.1,
+                y: e.y - 0.1,
+                move: e.move - 0.1,
+            }
+        return {
+            ...e,
+            move: 10,
+        }
+    }
+
+    toClientPosition(e) {
+        return {
+            ...e,
+            x: this.board.clientPosition.x,
+            y: this.board.clientPosition.y,
+        }
+    }
+
     drawEdges() {
         this.edges.forEach(edge => this.drawEdge(edge))
     }
     drawLine() {
-        if (!this.drawTo || !this.target)
+        if (!this.board.shift || this.board.buttons !== 1 || !this.target)
             return
-        if (this.shift)
-            this.board.drawLine(this.target.x, this.target.y, this.drawTo.x, this.drawTo.y)
-        else {
-            this.nodes = this.nodes.map(e => {
-                if (e.label === this.target.label)
-                    return {
-                        ...e,
-                        ...this.drawTo,
-                    }
-                return e
-            })
-        }
-        this.setEvent()
+
+        const { x, y } = this.board.clientPosition
+        this.board.drawLine(this.target.x, this.target.y, x, y)
     }
     checkAddEdge() {
-        if (!this.shift)
+        if (!this.target)
             return
+        if (!this.board.shift)
+            return
+
+        const { x, y } = this.board.clientPosition
         this.nodes.forEach(e => {
-            if (!this.target || !this.drawTo)
+            if (!this.target)
                 return
             if (e.label === this.target.label)
                 return
-            if (Math.abs(e.x - this.drawTo.x) <= this.board.radius && Math.abs(e.y - this.drawTo.y) <= this.board.radius) {
+            if (this.equalPoint(x, e.x) && this.equalPoint(y, e.y)) {
                 this.addEdge(this.target.label, e.label)
+                this.target = null
             }
         })
     }
@@ -110,50 +172,9 @@ class Graph {
             return this.removeEdge(edge)
 
         this.board.drawLine(posFrom.x, posFrom.y, posTo.x, posTo.y)
+        if (this.directed)
+            this.board.drawDirected(posFrom.x, posFrom.y, posTo.x, posTo.y)
 
-    }
-
-    setEvent() {
-        this.nodes.map((e, index) => {
-            this.board.canvas.removeEventListener('click', this.functions[index])
-
-            this.functions[index] = handle
-
-            this.board.canvas.addEventListener('click', event => this.functions[index](event, this))
-
-            function handle(event, graph) {
-                if (Math.abs(event.clientX - e.x) <= graph.board.radius)
-                    if (Math.abs(event.clientY - e.y) <= graph.board.radius)
-                        graph.target = e
-            }
-        })
-
-        window.addEventListener('mousemove', event => {
-
-            if (!this.target)
-                this.nodes.forEach(e => {
-                    if (Math.abs(e.x - event.clientX) <= this.board.radius)
-                        if (Math.abs(e.y - event.clientY) <= this.board.radius)
-                            this.target = e
-                })
-
-            this.shift = event.shiftKey
-
-            if (event.buttons === 1) {
-                {
-                    this.drawTo = {
-                        x: event.clientX,
-                        y: event.clientY,
-                    }
-                }
-            }
-            else {
-                this.target = null
-                this.drawTo = null
-            }
-
-
-        })
     }
 
     exportMatrix() {
@@ -167,10 +188,15 @@ class Graph {
 
         this.edges.forEach(e => {
             matrix[e.from][e.to]++
-            matrix[e.to][e.from]++
+            if (!this.directed)
+                matrix[e.to][e.from]++
         })
 
         return matrix
+    }
+
+    equalPoint(p1, p2) {
+        return Math.abs(p1 - p2) <= this.board.radius
     }
 }
 
