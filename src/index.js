@@ -1,12 +1,15 @@
 import Graph from './Graph'
 
-const g = new Graph(true)
+const g = new Graph({
+    directed: true,
+    showDistance: true,
+})
+
 g.board.appendTo('#canvas')
 
 const edgesComponent = document.getElementById('edges')
 const guide = document.getElementById('guide')
-const directedSelect = document.getElementById('directedSelect')
-const matrixNodeNode = document.getElementById('matrixNodeNode')
+const optionsComponent = document.getElementById('optionsComponent')
 
 function updateData() {
     updateEdges()
@@ -61,16 +64,7 @@ setInterval(updateData, 1000)
 document.getElementById('removeNodeButton')
     .addEventListener('click', () => g.removeNode(g.nodes.length))
 
-const directed = directedSelect.querySelectorAll('input')[0]
-const unDirected = directedSelect.querySelectorAll('input')[1]
-directed.onclick = () => {
-    g.directed = true
-}
-
-unDirected.onclick = () => {
-    g.directed = false
-}
-
+const matrixNodeNode = document.getElementById('matrixNodeNode')
 const optionTab = document.getElementById('optionTab')
 const tabButtons = optionTab.querySelectorAll('li')
 
@@ -81,11 +75,11 @@ tabButtons.forEach((e, i) => {
 
         edgesComponent.style.display = 'none'
         guide.style.display = 'none'
-        directedSelect.style.display = 'none'
+        optionsComponent.style.display = 'none'
         matrixNodeNode.style.display = 'none'
 
         if (i === 0)
-            directedSelect.style.display = 'block'
+            optionsComponent.style.display = 'block'
         if (i === 1)
             edgesComponent.style.display = 'block'
         if (i === 2)
@@ -139,7 +133,10 @@ window.addEventListener('contextmenu', event => {
         const button = document.createElement('button')
         button.className = 'btn btn-light'
         button.innerHTML = 'Thêm đỉnh'
-        button.onclick = event => g.addNode(g.nodes.length + 1)
+        button.onclick = event => {
+            const { x, y } = g.board.clientPosition
+            g.addNode(g.nodes.length + 1, x, y)
+        }
 
         const button1 = document.createElement('button')
         button1.className = 'btn btn-light'
@@ -159,4 +156,13 @@ window.addEventListener('contextmenu', event => {
         optionsMenu.append(button, button1, button2, button3)
         document.body.append(optionsMenu)
     }
+})
+
+
+document.getElementById('directedToggle').addEventListener('click', event => {
+    g.directed = !g.directed
+})
+
+document.getElementById('showDistanceToggle').addEventListener('click', event => {
+    g.showDistance = !g.showDistance
 })

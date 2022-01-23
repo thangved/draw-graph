@@ -45,11 +45,17 @@ class Board {
         this.context.fill()
         this.context.fillStyle = '#000'
     }
-    drawNode(x, y, u) {
+    drawNode(x, y, u, active) {
+        if (active) {
+            this.context.strokeStyle = '#dc3545'
+            this.context.lineWidth = 5
+        }
         this.drawCircle(x, y, this.radius)
         this.context.font = `${this.fontSize}px Arial`
         this.context.textAlign = 'center'
         this.context.fillText(u, x, y + this.fontSize / 2)
+        this.context.strokeStyle = '#000'
+        this.context.lineWidth = 1
     }
     drawLine(x1, y1, x2, y2) {
         this.context.beginPath()
@@ -71,13 +77,13 @@ class Board {
         }
 
         const B = {
-            x: M.x + this.radius * Math.cos(angle - Math.PI / 2),
-            y: M.y + this.radius * Math.sin(angle - Math.PI / 2),
+            x: M.x + this.radius / 2 * Math.cos(angle - Math.PI / 2),
+            y: M.y + this.radius / 2 * Math.sin(angle - Math.PI / 2),
         }
 
         const C = {
-            x: M.x + this.radius * Math.cos(angle + Math.PI / 2),
-            y: M.y + this.radius * Math.sin(angle + Math.PI / 2),
+            x: M.x + this.radius / 2 * Math.cos(angle + Math.PI / 2),
+            y: M.y + this.radius / 2 * Math.sin(angle + Math.PI / 2),
         }
 
         this.context.beginPath()
@@ -91,8 +97,24 @@ class Board {
         this.context.fill()
         this.context.lineWidth = 1
     }
-    clear() {
+
+    drawDistance(x1, y1, x2, y2) {
+        const middle = {
+            x: (x1 + x2) / 2,
+            y: (y1 + y2) / 2,
+        }
+
+        const distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
+
+        this.context.fillStyle = '#000'
+        this.context.beginPath()
+        this.context.fillText(parseInt(distance / 100), middle.x, middle.y)
+        this.context.textAlign = 'center'
         this.context.fillStyle = '#fff'
+    }
+
+    clear() {
+        this.context.fillStyle = '#f4f8ff'
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height)
         this.context.fill()
         this.context.fillStyle = '#000'

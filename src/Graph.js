@@ -1,19 +1,20 @@
 import Board from './Board'
 
 class Graph {
-    constructor(directed) {
+    constructor({ directed, showDistance }) {
         this.board = new Board();
         this.nodes = []
         this.edges = []
         this.functions = []
         this.target = null
         this.directed = directed
+        this.showDistance = showDistance
 
         this.init()
     }
 
     init() {
-        window.ondblclick = event => {
+        this.board.canvas.ondblclick = event => {
             if (this.target)
                 return
             this.addNode(this.nodes.length + 1, this.board.clientPosition.x, this.board.clientPosition.y)
@@ -85,7 +86,7 @@ class Graph {
     }
     drawNodes() {
         this.nodes.forEach(node => {
-            this.board.drawNode(node.x, node.y, node.label)
+            this.board.drawNode(node.x, node.y, node.label, this.target?.label === node.label)
         })
     }
     updateNodes() {
@@ -93,8 +94,10 @@ class Graph {
             if (!this.board.buttons || this.board.shift || !this.target)
                 return this.exchange(e)
 
-            if (this.target.label === e.label)
+            if (this.target.label === e.label) {
+                this.target = this.toClientPosition(e)
                 return this.toClientPosition(e)
+            }
 
             return this.exchange(e)
         })
@@ -172,8 +175,12 @@ class Graph {
             return this.removeEdge(edge)
 
         this.board.drawLine(posFrom.x, posFrom.y, posTo.x, posTo.y)
+
         if (this.directed)
             this.board.drawDirected(posFrom.x, posFrom.y, posTo.x, posTo.y)
+
+        if (this.showDistance)
+            this.board.drawDistance(posFrom.x, posFrom.y, posTo.x, posTo.y)
 
     }
 
