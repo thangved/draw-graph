@@ -1,7 +1,7 @@
 {
   "name": "thangved-graph-draw",
   "version": "1.0.1",
-  "main": "./src/index.js",
+  "main": "./src/export.js",
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^6.5.1",
