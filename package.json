@@ -17,7 +17,7 @@
     "build": "webpack --mode=production && sass ./src/styles.scss ./docs/styles.css"
   },
   "dependencies": {
-    "graph-board": "^1.0.2",
+    "graph-board": "^1.0.3",
     "html-webpack-plugin": "^5.5.0",
     "lodash": "^4.17.21",
     "path": "^0.12.7"
