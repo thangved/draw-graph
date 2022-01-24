@@ -1,4 +1,4 @@
-import Graph from './Graph'
+import Graph from 'graph-board'
 
 const g = new Graph({
     directed: true,
@@ -6,7 +6,7 @@ const g = new Graph({
     showGrid: true,
 })
 
-g.board.appendTo('#canvas')
+g.appendTo('#canvas')
 
 const edgesComponent = document.getElementById('edges')
 const guide = document.getElementById('guide')
