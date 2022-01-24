@@ -3,6 +3,7 @@ import Graph from './Graph'
 const g = new Graph({
     directed: true,
     showDistance: true,
+    showGrid: true,
 })
 
 g.board.appendTo('#canvas')
@@ -178,4 +179,8 @@ document.getElementById('directedToggle').addEventListener('click', event => {
 
 document.getElementById('showDistanceToggle').addEventListener('click', event => {
     g.showDistance = !g.showDistance
+})
+
+document.getElementById('showGridToggle').addEventListener('click', event => {
+    g.showGrid = !g.showGrid
 })

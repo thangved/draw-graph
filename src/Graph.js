@@ -1,7 +1,8 @@
 import Board from './Board'
+import Stack from './Stack';
 
 class Graph {
-    constructor({ directed, showDistance }) {
+    constructor({ directed, showDistance, showGrid }) {
         this.board = new Board();
         this.nodes = []
         this.edges = []
@@ -9,6 +10,7 @@ class Graph {
         this.target = null
         this.directed = directed
         this.showDistance = showDistance
+        this.showGrid = showGrid
 
         this.init()
     }
@@ -80,6 +82,8 @@ class Graph {
 
     draw() {
         this.board.clear()
+        if (this.showGrid)
+            this.board.drawGrid()
         this.drawEdges()
         this.drawLine()
         this.drawNodes()
@@ -204,6 +208,36 @@ class Graph {
 
     equalPoint(p1, p2) {
         return Math.abs(p1 - p2) <= this.board.radius
+    }
+
+    neighbours(from) {
+        const matrix = this.exportMatrix()[from]
+        const list = matrix.map((e, i) => {
+            if (e)
+                return i
+            return e
+        }).filter(e => e)
+        return list
+    }
+
+    deepFirstSearch(from) {
+        const stack = new Stack()
+        const marked = []
+        stack.push(from)
+
+        const steps = []
+
+        while (!stack.empty()) {
+            const u = stack.pop()
+            if (marked[u])
+                continue
+            marked[u] = true
+            const neigh = this.neighbours(u)
+            steps.push({ u, stack: [...stack.__data__], marked: [...marked], neigh })
+            neigh.forEach(e => stack.push(e))
+        }
+
+        return steps
     }
 
 }
