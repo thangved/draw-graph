@@ -560,12 +560,13 @@ graceful-fs@^4.1.2, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
-graph-board@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/graph-board/-/graph-board-1.0.8.tgz#2ff88463cb3e4525e148051158e21af42e239863"
-  integrity sha512-48OlaqZLwm/ZX6/KYbXL9kMUaUamHlChZYXkodr9Sc3fOZqS/biCnlQmNdorqH6RIkpNYLKA2EStFf00a17CXw==
+graph-board@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/graph-board/-/graph-board-1.0.13.tgz#6f3e55fd8c7761755159bb544f6edb1792828216"
+  integrity sha512-5L9gXRXTVNWywZ+tz5njRReWy65IHlMRoK5xaYA2bITcn1eAsdoxxcBhylLOouiblvNgPK9y6AteNAJElPcJFw==
   dependencies:
     path "^0.12.7"
+    stack-structure "^1.0.2"
 
 has-flag@^4.0.0:
   version "4.0.0"
@@ -1127,6 +1128,11 @@ source-map@~0.7.2:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
+
+stack-structure@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/stack-structure/-/stack-structure-1.0.2.tgz#c7097a3a5f4bbfdbd23f149fe91f37f2f7d9a776"
+  integrity sha512-JFPT7yv1xOEJvCU2rSb1FOKcj8PaZ1AGdY/nn8cR8TD7S+1BrjAlLNKOp70g/eFPlp2TjqWI9cR+Im200fCUtQ==
 
 strip-ansi@^6.0.1:
   version "6.0.1"
