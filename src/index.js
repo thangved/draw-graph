@@ -28,13 +28,13 @@ function updateEdges() {
         })
         Edge.innerHTML = `<li class="edge list-group-item">
             <span>
-                ${e.from}
+                ${g.character ? g.alphabet[e.from] : e.from}
             </span> 
             <div>
                 <i class="fas fa-long-arrow-alt-right"></i>
             </div>
             <span>
-                ${e.to}
+                ${g.character ? g.alphabet[e.to] : e.to}
             </span>
         </li>`
         edgesComponent.append(Edge)
@@ -48,7 +48,7 @@ function updateTable() {
     const th = document.createElement('tr')
     const matrix = g.exportMatrix()
 
-    matrix.forEach((e, i) => th.innerHTML += `<td>${i || 'X'}</td>`)
+    matrix.forEach((e, i) => th.innerHTML += `<td>${i ? g.getNodes()[i - 1]?.label : 'X'}</td>`)
     thead.innerHTML = ''
     if (g.nodes.length === 0)
         return
@@ -60,7 +60,7 @@ function updateTable() {
         const tr = document.createElement('tr')
         for (let j = 0; j < matrix.length; j++)
             if (j === 0)
-                tr.innerHTML += `<td>${i}</td>`
+                tr.innerHTML += `<td>${g.getNodes()[i - 1].label}</td>`
             else
                 tr.innerHTML += `<td class="${matrix[i][j] && 'table-primary'}">${matrix[i][j]}</td>`
 
@@ -146,7 +146,7 @@ function addContextMenu(event) {
     const button = document.createElement('button')
     button.className = 'btn btn-light'
     button.innerHTML = 'Thêm đỉnh'
-    button.onclick = event => {
+    button.onclick = () => {
         const { x, y } = g.board.clientPosition
         g.addNode(g.nodes.length + 1, x, y)
     }
@@ -154,7 +154,7 @@ function addContextMenu(event) {
     const button1 = document.createElement('button')
     button1.className = 'btn btn-light'
     button1.innerHTML = 'Xóa đỉnh'
-    button1.onclick = event => g.removeNode(g.nodes.length)
+    button1.onclick = () => g.removeNode(g.nodes.length)
 
     const button2 = document.createElement('button')
     button2.disabled = true
@@ -173,14 +173,18 @@ function addContextMenu(event) {
 window.addEventListener('contextmenu', addContextMenu)
 
 
-document.getElementById('directedToggle').addEventListener('click', event => {
+document.getElementById('directedToggle').addEventListener('click', () => {
     g.directed = !g.directed
 })
 
-document.getElementById('showDistanceToggle').addEventListener('click', event => {
+document.getElementById('showDistanceToggle').addEventListener('click', () => {
     g.showDistance = !g.showDistance
 })
 
-document.getElementById('showGridToggle').addEventListener('click', event => {
+document.getElementById('showGridToggle').addEventListener('click', () => {
     g.showGrid = !g.showGrid
+})
+
+document.getElementById('characterToggle').addEventListener('click', () => {
+    g.character = !g.character
 })
