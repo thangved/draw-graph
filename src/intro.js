@@ -7,7 +7,11 @@ export default function intro() {
             steps: [
                 {
                     title: 'Xin chào',
-                    intro: 'Đây là hướng dẫn, còn tôi là người hướng dẫn'
+                    intro: 'Đây là hướng dẫn tân thủ, còn tôi là The Trainer',
+                },
+                {
+                    title: 'Trước khi bắt đầu',
+                    intro: 'Nhấn "Kế tiếp" để bắt đầu chứ còn trước sau gì : )'
                 },
                 {
                     title: 'Bảng vẽ',
@@ -45,8 +49,18 @@ export default function intro() {
                     element: document.getElementById('optionsComponent'),
                 },
                 {
+                    title: 'Xóa nút',
+                    intro: 'Để thuận tiện cho người dùng mà chủ yếu là bớt việc cho lập trình viên, chúng tôi cung cấp cho bạn cái nút này để xóa nút lớn nhất trong đồ thị',
+                    element: document.getElementById('removeNodeButton'),
+                },
+                {
+                    title: 'Xem một số thứ khác',
+                    intro: 'Trên đây có một số thông tin của đồ thị, bạn có thể khám phá thêm',
+                    element: document.getElementById('optionTab'),
+                },
+                {
                     title: 'Xong',
-                    intro: 'Vậy là xong phần hướng dẫn, bạn có thể tiếp tục phần mềm một cách vui vẻ',
+                    intro: 'Vậy là xong phần hướng dẫn, chúc bạn có một học kỳ không rớt môn',
                 }
             ],
             nextLabel: 'Kế tiếp',
