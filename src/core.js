@@ -15,15 +15,6 @@ export default function core() {
     let searchStep = 0
     let searchData = []
 
-    g.addNode(1)
-    g.addNode(2)
-    g.addNode(3)
-    g.addNode(4)
-    g.addEdge(1, 4)
-    g.addEdge(1, 2)
-    g.addEdge(2, 3)
-    g.addEdge(2, 4)
-
     g.appendTo('#canvas')
 
     const edgesComponent = document.getElementById('edges')
