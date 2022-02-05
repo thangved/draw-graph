@@ -11,6 +11,8 @@ export default function core() {
     })
 
     let searchType = 0
+    let searchStep = 0
+    let searchData = []
 
     // g.addNode(1)
     // g.addNode(2)
@@ -88,7 +90,7 @@ export default function core() {
 
     function updateSearchNodes() {
         const searchNodes = firstSearch.querySelector('#searchNodes')
-        if (searchNodes.querySelectorAll('button').length === g.getNodes().length)
+        if (searchNodes.querySelectorAll('button').length === g.getNodes().length && g.motionSteps.step === searchStep)
             return
 
         searchNodes.innerHTML = ``
@@ -100,6 +102,7 @@ export default function core() {
             searchNodes.appendChild(button)
 
             button.onclick = () => {
+                searchStep = 0
                 switch (searchType) {
                     case 0:
                         updateSearchResult(g.deepFirstSearch(index + 1))
@@ -110,15 +113,33 @@ export default function core() {
                 }
             }
         })
+
+        updateSearchButtons()
+    }
+
+    function updateSearchButtons() {
+        const searchPrev = firstSearch.querySelector('#searchPrev')
+        const searchNext = firstSearch.querySelector('#searchNext')
+
+        searchPrev.onclick = () => {
+            searchStep = g.prevStep()
+            updateSearchResult({ steps: searchData })
+        }
+        searchNext.onclick = () => {
+            searchStep = g.nextStep()
+            updateSearchResult({ steps: searchData })
+        }
+
     }
 
     function updateSearchResult(data) {
+        searchData = data.steps
         const deleteResult = firstSearch.querySelector('#deleteResult')
         const result = firstSearch.querySelector('#edges')
         result.innerHTML = ``
 
-        data.forEach(e => {
-            result.innerHTML += `<li class="edge list-group-item">
+        data.steps.forEach((e, index) => {
+            result.innerHTML += `<li class="edge list-group-item ${searchStep === index ? 'active' : ''}">
             <span>
                 ${g.getNodes()[e.from - 1].label}
             </span> 
@@ -133,7 +154,7 @@ export default function core() {
 
         deleteResult.onclick = () => {
             result.innerHTML = ''
-            g.motionStop()
+            g.motionSteps.steps = []
         }
 
     }
