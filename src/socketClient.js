@@ -19,7 +19,9 @@ export default function socketClient(graph = new Graph()) {
 
 	function addClient(id) {
 		document.getElementById("clients").innerHTML += `
-			<li class="list-group-item">${id} đang xem</li>
+			<li class="list-group-item">
+				&#9889; ${id} đang xem
+			</li>
 		`;
 	}
 
@@ -30,7 +32,14 @@ export default function socketClient(graph = new Graph()) {
 			};
 			return id;
 		},
-		connect(providerId) {
+		connect(providerId, callback) {
+			if (providerId === id)
+				return toast({
+					message:
+						"Bạn đang tự đang ký bằng id của mình, thiệt là ảo quá đi : )",
+					timeout: 2000,
+				});
+
 			socket.emit("subscribe", {
 				providerId,
 				id: "xxxxxx" + id.slice(6),
@@ -46,6 +55,8 @@ export default function socketClient(graph = new Graph()) {
 				graph.showDistance = gr.showDistance;
 				graph.motionSteps = gr.motionSteps;
 			});
+
+			callback();
 		},
 	};
 }

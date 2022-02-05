@@ -52,22 +52,24 @@ connectButton.onclick = () => {
 			type: "bg-danger text-white",
 		});
 
-	socket.connect(connectId.value);
-	toast({
-		message: "Đã kết nối với " + connectId.value,
-		timeout: 2000,
-		type: "bg-success text-white",
-	});
-
-	document.getElementById("canvas").classList.add("full");
-	g.appendTo("#canvas");
-
-	g.board.canvas.ondblclick = () => {
+	socket.connect(connectId.value, () => {
 		toast({
-			message:
-				"Bạn không thể chỉnh sửa, để thoát chế độ này hãy reload lại trang web",
+			message: "Đã kết nối với " + connectId.value,
 			timeout: 2000,
-			type: "bg-warning",
+			type: "bg-success text-white",
 		});
-	};
+
+		document.getElementById("canvas").classList.add("full");
+		g.appendTo("#canvas");
+
+		g.board.canvas.ondblclick = () => {
+			toast({
+				message:
+					"Bạn không thể chỉnh sửa, để thoát chế độ này hãy reload lại trang web",
+				timeout: 2000,
+				type: "bg-warning",
+			});
+		};
+		g.board.canvas.onmousemove = () => {};
+	});
 };
