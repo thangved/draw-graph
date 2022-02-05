@@ -3,6 +3,7 @@ import intro from './intro';
 import socketClient from './socketClient';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import toast from './toast';
 
 const g = core()
 const socket = socketClient(g)
@@ -43,9 +44,20 @@ const connectButton = liveShare.querySelector('#connectButton')
 connectButton.onclick = () => {
     const connectId = liveShare.querySelector('#connectId')
     if (!connectId.value)
-        return alert('Vui lòng nhập id')
+        return toast({
+            message: 'Vui lòng nhập id!',
+            timeout: 2000,
+            type: 'bg-danger text-white',
+        })
 
     socket.connect(connectId.value)
-    alert('Đã kết nối')
+    toast({
+        message: 'Đã kết nối với ' + connectId.value,
+        timeout: 2000,
+        type: 'bg-success text-white'
+    })
 
+    document.getElementById('canvas').classList.add('full')
+    g.appendTo('#canvas')
 }
+

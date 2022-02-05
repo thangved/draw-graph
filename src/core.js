@@ -115,10 +115,14 @@ export default function core() {
         const searchNext = firstSearch.querySelector('#searchNext')
 
         searchPrev.onclick = () => {
+            if (!searchStep)
+                return
             searchStep = g.prevStep()
             updateSearchResult({ steps: searchData })
         }
         searchNext.onclick = () => {
+            if (searchStep === searchData.length - 1)
+                return
             searchStep = g.nextStep()
             updateSearchResult({ steps: searchData })
         }

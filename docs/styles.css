@@ -21,6 +21,15 @@ body {
   overflow: hidden;
   border-right: 1px solid #ddd;
 }
+#canvas.full {
+  width: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 100;
+}
 
 #details {
   width: 50%;

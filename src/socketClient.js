@@ -15,6 +15,7 @@ export default function socketClient(graph = new Graph()) {
         },
         connect(id) {
             socket.on(id, gr => {
+                console.log(gr.motionSteps)
                 graph.nodes = gr.nodes
                 graph.edges = gr.edges
                 graph.character = gr.character
