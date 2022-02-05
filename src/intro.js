@@ -1,7 +1,9 @@
 import introJs from 'intro.js'
 import 'intro.js/introjs.css'
+import openContextMenu from './context'
 
 export default function intro() {
+    openContextMenu(document.body.offsetWidth / 2, document.body.offsetHeight / 2)
     introJs()
         .setOptions({
             steps: [
@@ -12,6 +14,11 @@ export default function intro() {
                 {
                     title: 'Trước khi bắt đầu',
                     intro: 'Nhấn "Kế tiếp" để bắt đầu chứ còn trước sau gì : )'
+                },
+                {
+                    title: 'Tùy chọn nhanh',
+                    intro: 'Chuột phải để xem một số tùy chọn nhanh',
+                    element: document.getElementById('optionsOverlay'),
                 },
                 {
                     title: 'Bảng vẽ',
