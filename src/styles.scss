@@ -26,8 +26,20 @@ body {
 #details {
     width: 50%;
     height: 100vh;
-    overflow: auto;
     background: #ddd;
+    .basic {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .wrapper {
+        flex: 1;
+        overflow: auto;
+        border-top: 1px solid #ddd;
+        img {
+            width: 100%;
+        }
+    }
     .table-responsive {
         margin: 0;
         padding: 0;

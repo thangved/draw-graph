@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'static/js/main.[contenthash].js',
+        filename: 'static/js/[name].[contenthash].js',
         path: path.resolve(__dirname, path.resolve('./docs'))
     },
     module: {
@@ -25,5 +25,9 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({
         template: path.resolve(__dirname, './src/public/index.html'),
+        title: 'Caching',
     })],
+    optimization: {
+        runtimeChunk: 'single',
+    },
 }

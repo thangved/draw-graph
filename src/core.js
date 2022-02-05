@@ -8,20 +8,21 @@ export default function core() {
         showDistance: false,
         showGrid: true,
         character: true,
+        motion: true,
     })
 
     let searchType = 0
     let searchStep = 0
     let searchData = []
 
-    // g.addNode(1)
-    // g.addNode(2)
-    // g.addNode(3)
-    // g.addNode(4)
-    // g.addEdge(1, 4)
-    // g.addEdge(1, 2)
-    // g.addEdge(2, 3)
-    // g.addEdge(2, 4)
+    g.addNode(1)
+    g.addNode(2)
+    g.addNode(3)
+    g.addNode(4)
+    g.addEdge(1, 4)
+    g.addEdge(1, 2)
+    g.addEdge(2, 3)
+    g.addEdge(2, 4)
 
     g.appendTo('#canvas')
 
@@ -29,6 +30,7 @@ export default function core() {
     const guide = document.getElementById('guide')
     const optionsComponent = document.getElementById('optionsComponent')
     const firstSearch = document.getElementById('firstSearch')
+    const liveShare = document.getElementById('liveShare')
 
     function updateData() {
         updateEdges()
@@ -200,6 +202,9 @@ export default function core() {
                 case 3:
                     firstSearch.style.display = 'block'
                     break
+                case 4:
+                    liveShare.style.display = 'block'
+                    break
 
                 default:
                     guide.style.display = 'block'
@@ -250,22 +255,27 @@ export default function core() {
 
     window.addEventListener('contextmenu', addContextMenu)
 
-    document.getElementById('directedToggle').addEventListener('click', () => {
-        g.directed = !g.directed
-    })
+    document.getElementById('directedToggle').onclick = () => {
+        g.setDirected(!g.directed)
+    }
 
-    document.getElementById('showDistanceToggle').addEventListener('click', () => {
-        g.showDistance = !g.showDistance
-    })
+    document.getElementById('showDistanceToggle').onclick = () => {
+        g.setShowDistance(!g.showDistance)
+    }
 
-    document.getElementById('showGridToggle').addEventListener('click', () => {
-        g.showGrid = !g.showGrid
-    })
+    document.getElementById('showGridToggle').onclick = () => {
+        g.setShowGrid(!g.showGrid)
+    }
 
-    document.getElementById('characterToggle').addEventListener('click', () => {
-        g.character = !g.character
-    })
+    document.getElementById('characterToggle').onclick = () => {
+        g.setCharacter(!g.character)
+    }
+
+    document.getElementById('animationToggle').onclick = () => {
+        g.setMotion(!g.motion)
+    }
 
     updateData()
     setInterval(updateData, 1000)
+    return g
 }
