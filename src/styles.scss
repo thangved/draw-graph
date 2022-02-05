@@ -1,109 +1,109 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Roboto", sans-serif;
-    user-select: none;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", sans-serif;
+	user-select: none;
 }
 
 body {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	min-height: 100vh;
 }
 
 #canvas {
-    box-shadow: 10px 0 20px #00000020;
-    width: 50%;
-    height: 100vh;
-    overflow: hidden;
-    border-right: 1px solid #ddd;
-    &.full {
-        width: auto;
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        z-index: 100;
-    }
+	box-shadow: 10px 0 20px #00000020;
+	width: 50%;
+	height: 100vh;
+	overflow: hidden;
+	border-right: 1px solid #ddd;
+	&.full {
+		width: auto;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		z-index: 100;
+	}
 }
 
 #details {
-    width: 50%;
-    height: 100vh;
-    background: #ddd;
-    .basic {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-    .wrapper {
-        flex: 1;
-        overflow: auto;
-        border-top: 1px solid #ddd;
-        img {
-            width: 100%;
-        }
-    }
-    .table-responsive {
-        margin: 0;
-        padding: 0;
-        table {
-            margin: 0;
-            padding: 0;
-        }
-    }
+	width: 50%;
+	height: 100vh;
+	background: #ddd;
+	.basic {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+	.wrapper {
+		flex: 1;
+		overflow: auto;
+		border-top: 1px solid #ddd;
+		img {
+			width: 100%;
+		}
+	}
+	.table-responsive {
+		margin: 0;
+		padding: 0;
+		table {
+			margin: 0;
+			padding: 0;
+		}
+	}
 }
 
 .basic {
-    width: 100%;
-    box-shadow: 0 10px 10px #00000020;
-    min-height: 100vh;
+	width: 100%;
+	box-shadow: 0 10px 10px #00000020;
+	min-height: 100vh;
 }
 
 #edges {
-    width: 100%;
-    .edge {
-        display: flex;
-        padding: 0;
-        overflow: hidden;
-        border-radius: 2px;
-        &:hover {
-            text-decoration: line-through;
-            color: #666;
-            cursor: pointer;
-        }
-        div {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            & + span {
-                border-left: 1px solid #ddd;
-                border-right: none;
-            }
-        }
-        span {
-            background: #fdfdfd;
-            color: #000;
-            padding: 5px 20px;
-            border-right: 1px solid #ddd;
-        }
-    }
+	width: 100%;
+	.edge {
+		display: flex;
+		padding: 0;
+		overflow: hidden;
+		border-radius: 2px;
+		&:hover {
+			text-decoration: line-through;
+			color: #666;
+			cursor: pointer;
+		}
+		div {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			& + span {
+				border-left: 1px solid #ddd;
+				border-right: none;
+			}
+		}
+		span {
+			background: #fdfdfd;
+			color: #000;
+			padding: 5px 20px;
+			border-right: 1px solid #ddd;
+		}
+	}
 }
 
 @media (max-width: 740px) {
-    #canvas {
-        width: 100%;
-    }
+	#canvas {
+		width: 100%;
+	}
 
-    #details {
-        width: 100%;
-        height: auto;
-        overflow: unset;
-    }
+	#details {
+		width: 100%;
+		height: auto;
+		overflow: unset;
+	}
 }
