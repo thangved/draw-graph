@@ -13,10 +13,8 @@ app.get('/', (req, res) => {
 app.use('/', express.static('./docs'))
 
 io.on('connection', (socket) => {
-    socket.on('create id', id => {
-        socket.on(id, graph => {
-            io.emit(id, graph)
-        })
+    socket.on('change graph', ({ id, graph }) => {
+        io.emit(id, graph)
     })
 });
 

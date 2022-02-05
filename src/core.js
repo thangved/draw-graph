@@ -179,6 +179,7 @@ export default function core() {
             optionsComponent.style.display = 'none'
             matrixNodeNode.style.display = 'none'
             firstSearch.style.display = 'none'
+            liveShare.style.display = 'none'
 
             switch (i) {
                 case 0:

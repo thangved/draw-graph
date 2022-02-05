@@ -3,13 +3,11 @@ import { io } from 'socket.io-client'
 
 export default function socketClient(graph = new Graph()) {
     const socket = io()
-    const id = Math.random().toString(36).slice(4)
+    const id = Math.random().toString(36).slice(4).toUpperCase()
 
     graph.onchange = () => {
-        socket.emit(id, graph)
+        socket.emit('change graph', { id, graph })
     }
-
-    socket.emit('create id', id)
 
     return {
         getId() {
@@ -22,6 +20,8 @@ export default function socketClient(graph = new Graph()) {
                 graph.character = gr.character
                 graph.directed = gr.directed
                 graph.motion = gr.motion
+                graph.showGrid = gr.showGrid
+                graph.showDistance = gr.showDistance
                 graph.motionSteps = gr.motionSteps
             })
         },
