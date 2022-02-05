@@ -41,11 +41,19 @@
 
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">
+                        Duyệt <i class="fas fa-network-wired"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">
                         Hướng dẫn <i class="fas fa-question-circle"></i>
                     </a>
                 </li>
 
             </ul>
+
+            <hr>
 
             <h2 class="title">
                 <button class="btn btn-danger" id="removeNodeButton">
@@ -135,6 +143,45 @@
                         <hr>
                         <img src="./assets/images/delete_edge.png" alt="delete_edge">
                     </li>
+                </ul>
+            </div>
+
+            <div id="firstSearch" style="display: none;">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            DFS
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">
+                            BFS
+                        </a>
+                    </li>
+
+                </ul>
+
+                <hr>
+
+                <h6 class="title">
+                    <strong>Chọn nút bắt đầu</strong>
+                </h6>
+
+                <div class="btn-group" id="searchNodes">
+                </div>
+
+                <hr>
+
+                <h6 class="title">
+                    <strong>Kết quả</strong>
+                    <div class="btn btn-outline-danger btn-sm" id="deleteResult">
+                        <i class="fa fa-trash"></i>
+                    </div>
+                </h6>
+
+                <ul class="list-group" id="edges">
+
                 </ul>
             </div>
 
