@@ -87,6 +87,9 @@ export default function core() {
 
     function updateSearchNodes() {
         const searchNodes = firstSearch.querySelector('#searchNodes')
+        if (searchNodes.querySelectorAll('button').length === g.getNodes().length)
+            return
+
         searchNodes.innerHTML = ``
 
         g.getNodes().forEach((node, index) => {
