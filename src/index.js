@@ -59,5 +59,13 @@ connectButton.onclick = () => {
 
     document.getElementById('canvas').classList.add('full')
     g.appendTo('#canvas')
+
+    g.board.canvas.ondblclick = () => {
+        toast({
+            message: 'Bạn không thể chỉnh sửa, để thoát chế độ này hãy reload lại trang web',
+            timeout: 2000,
+            type: 'bg-warning'
+        })
+    }
 }
 
