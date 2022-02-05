@@ -1,9 +1,27 @@
 const Graph = require("graph-board");
 import { io } from "socket.io-client";
+import toast from "./toast";
 
 export default function socketClient(graph = new Graph()) {
 	const socket = io("https://draw-graph.herokuapp.com");
+	// const socket = io();
 	const id = Math.random().toString(36).slice(4).toUpperCase();
+
+	socket.on(`subscribe ${id}`, (clientId) => {
+		socket.emit("change graph", { id, graph });
+		toast({
+			message: `${clientId} đã kết nối`,
+			type: "bg-success text-white",
+			timeout: 2000,
+		});
+		addClient(clientId);
+	});
+
+	function addClient(id) {
+		document.getElementById("clients").innerHTML += `
+			<li class="list-group-item">${id} đang xem</li>
+		`;
+	}
 
 	return {
 		getId() {
@@ -12,9 +30,13 @@ export default function socketClient(graph = new Graph()) {
 			};
 			return id;
 		},
-		connect(id) {
-			socket.on(id, (gr) => {
-				console.log(gr.motionSteps);
+		connect(providerId) {
+			socket.emit("subscribe", {
+				providerId,
+				id: "xxxxxx" + id.slice(6),
+			});
+
+			socket.on(providerId, (gr) => {
 				graph.nodes = gr.nodes;
 				graph.edges = gr.edges;
 				graph.character = gr.character;

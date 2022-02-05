@@ -21,6 +21,9 @@ io.on("connection", (socket) => {
 	socket.on("change graph", ({ id, graph }) => {
 		io.emit(id, graph);
 	});
+	socket.on("subscribe", (ids) => {
+		io.emit(`subscribe ${ids.providerId}`, ids.id);
+	});
 });
 
 server.listen(process.env.PORT || 3000);
