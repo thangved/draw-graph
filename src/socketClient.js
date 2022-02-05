@@ -2,7 +2,7 @@ const Graph = require('graph-board')
 import { io } from 'socket.io-client'
 
 export default function socketClient(graph = new Graph()) {
-    const socket = io()
+    const socket = io('https://draw-graph.herokuapp.com')
     const id = Math.random().toString(36).slice(4).toUpperCase()
 
     graph.onchange = () => {
