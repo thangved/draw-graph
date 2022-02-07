@@ -71,5 +71,6 @@ connectButton.onclick = () => {
 			});
 		};
 		g.board.canvas.onmousemove = () => {};
+		document.title += " [View Only]";
 	});
 };

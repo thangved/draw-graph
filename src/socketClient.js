@@ -27,9 +27,7 @@ export default function socketClient(graph = new Graph()) {
 
 	return {
 		getId() {
-			graph.onchange = () => {
-				socket.emit("change graph", { id, graph });
-			};
+			graph.onchange = () => socket.emit("change graph", { id, graph });
 			return id;
 		},
 		connect(providerId, callback) {
@@ -54,6 +52,7 @@ export default function socketClient(graph = new Graph()) {
 				graph.showGrid = gr.showGrid;
 				graph.showDistance = gr.showDistance;
 				graph.motionSteps = gr.motionSteps;
+				graph.linkedParts = gr.linkedParts;
 			});
 
 			callback();

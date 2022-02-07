@@ -1,5 +1,6 @@
 import Graph from "graph-board";
 import openContextMenu from "./context";
+import toast from "./toast";
 
 export default function core() {
 	const g = new Graph({
@@ -13,14 +14,12 @@ export default function core() {
 	let searchType = 0;
 	let searchStep = 0;
 	let searchData = [];
+	let showConnected = false;
 
 	g.appendTo("#canvas");
 
 	const edgesComponent = document.getElementById("edges");
-	const guide = document.getElementById("guide");
-	const optionsComponent = document.getElementById("optionsComponent");
 	const firstSearch = document.getElementById("firstSearch");
-	const liveShare = document.getElementById("liveShare");
 
 	function updateData() {
 		updateEdges();
@@ -160,10 +159,30 @@ export default function core() {
 		};
 	}
 
+	document.getElementById("connectedOn").onclick = () => {
+		showConnected = true;
+		updateConnected();
+	};
+
+	document.getElementById("connectedOff").onclick = () => {
+		showConnected = false;
+		updateConnected();
+	};
+
+	function updateConnected() {
+		try {
+			if (showConnected) return g.tarjanStart();
+			g.tarjanStop();
+		} catch {
+			toast({
+				message: "Chưa vẽ đồ thị rồi lấy gì mà tìm : )",
+			});
+		}
+	}
+
 	document.getElementById("removeNodeButton").onclick = () =>
 		g.removeNode(g.nodes.length);
 
-	const matrixNodeNode = document.getElementById("matrixNodeNode");
 	const optionTab = document.getElementById("optionTab");
 	const tabButtons = optionTab.querySelectorAll(".nav-item");
 	const firstSearchButtons = firstSearch.querySelectorAll(".nav-item");
@@ -187,33 +206,12 @@ export default function core() {
 			);
 			e.querySelector("a").classList.add("active");
 
-			edgesComponent.style.display = "none";
-			guide.style.display = "none";
-			optionsComponent.style.display = "none";
-			matrixNodeNode.style.display = "none";
-			firstSearch.style.display = "none";
-			liveShare.style.display = "none";
+			const optionTabs = document.querySelectorAll(".options-tab");
+			optionTabs.forEach(
+				(optionTab) => (optionTab.style.display = "none")
+			);
 
-			switch (i) {
-				case 0:
-					optionsComponent.style.display = "block";
-					break;
-				case 1:
-					edgesComponent.style.display = "block";
-					break;
-				case 2:
-					matrixNodeNode.style.display = "block";
-					break;
-				case 3:
-					firstSearch.style.display = "block";
-					break;
-				case 4:
-					liveShare.style.display = "block";
-					break;
-
-				default:
-					guide.style.display = "block";
-			}
+			optionTabs[i].style.display = "block";
 		};
 	});
 

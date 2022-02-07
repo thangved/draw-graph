@@ -47,6 +47,12 @@
 
 					<li class="nav-item">
 						<a class="nav-link" aria-current="page" href="#">
+							Liên thông
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#">
 							Chia sẻ thời gian thực <i class="fa fa-link"></i>
 						</a>
 					</li>
@@ -70,7 +76,7 @@
 				</h2>
 
 				<div class="wrapper">
-					<div id="optionsComponent">
+					<div id="optionsComponent" class="options-tab">
 						<div class="form-check">
 							<input
 								type="checkbox"
@@ -146,7 +152,7 @@
 					</div>
 
 					<div
-						class="table-responsive text-center"
+						class="table-responsive text-center options-tab"
 						id="matrixNodeNode"
 						style="display: none"
 					>
@@ -158,72 +164,15 @@
 
 					<ul
 						id="edges"
-						class="list-group"
+						class="list-group options-tab"
 						style="display: none"
 					></ul>
 
-					<div class="bg-light" id="guide" style="display: none">
-						<h2 class="title">Hướng dẫn</h2>
-						<ul class="list-group">
-							<li class="list-group-item">
-								<i class="fas fa-plus"></i> Nhấn giữ
-								<strong>SHIFT</strong> kéo từ đỉnh này sang đỉnh
-								khác để vẽ cung
-								<hr />
-								<img
-									src="./assets/images/add_edge.png"
-									alt="add_edge"
-								/>
-							</li>
-							<li class="list-group-item">
-								<i class="fas fa-plus"></i> Nhấn đúp để thêm
-								đỉnh
-								<hr />
-								<img
-									src="./assets/images/add_node.png"
-									alt="add_node"
-								/>
-							</li>
-							<li class="list-group-item">
-								<i class="fas fa-plus"></i> Nhấn và kéo thả để
-								di chuyển đỉnh
-								<hr />
-								<img
-									src="./assets/images/move_node.png"
-									alt="move_node"
-								/>
-							</li>
-							<li class="list-group-item">
-								<i class="fas fa-plus"></i> Chuột phải để xem
-								một số tùy chọn
-								<hr />
-								<img
-									src="./assets/images/options.png"
-									alt="options"
-								/>
-							</li>
-							<li class="list-group-item">
-								<i class="fas fa-plus"></i> Chọn vào cung ở giao
-								diện đồ họa và kéo trái phải để thay đổi độ cong
-								<hr />
-								<img
-									src="./assets/images/curve_edge.png"
-									alt="curve_edge"
-								/>
-							</li>
-							<li class="list-group-item">
-								<i class="fas fa-plus"></i> Bấm chọn vào một
-								cung trong danh sách cung để xóa nó
-								<hr />
-								<img
-									src="./assets/images/delete_edge.png"
-									alt="delete_edge"
-								/>
-							</li>
-						</ul>
-					</div>
-
-					<div id="firstSearch" style="display: none">
+					<div
+						id="firstSearch"
+						style="display: none"
+						class="options-tab"
+					>
 						<ul class="nav nav-tabs">
 							<li class="nav-item">
 								<a
@@ -285,7 +234,27 @@
 						</div>
 					</div>
 
-					<div id="liveShare" style="display: none">
+					<div
+						id="connectedParts"
+						style="display: none"
+						class="options-tab"
+					>
+						<h6 class="title">Tìm bộ phận liên thông</h6>
+
+						<button id="connectedOn" class="btn btn-primary">
+							<span>Tìm</span> <i class="fa fa-search"></i>
+						</button>
+
+						<button id="connectedOff" class="btn btn-secondary">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+
+					<div
+						id="liveShare"
+						style="display: none"
+						class="options-tab"
+					>
 						<div id="myId" class="input-group">
 							<button class="btn btn-primary btn-sm">
 								Lấy mã của tôi
@@ -313,6 +282,71 @@
 								Kết nối <i class="fa fa-share"></i>
 							</button>
 						</div>
+					</div>
+
+					<div
+						class="bg-light options-tab"
+						id="guide"
+						style="display: none"
+					>
+						<h2 class="title">Hướng dẫn</h2>
+						<ul class="list-group">
+							<li class="list-group-item">
+								<i class="fas fa-plus"></i> Nhấn giữ
+								<strong>SHIFT</strong> kéo từ đỉnh này sang đỉnh
+								khác để vẽ cung
+								<hr />
+								<img
+									src="./assets/images/add_edge.png"
+									alt="add_edge"
+								/>
+							</li>
+							<li class="list-group-item">
+								<i class="fas fa-plus"></i> Nhấn đúp để thêm
+								đỉnh
+								<hr />
+								<img
+									src="./assets/images/add_node.png"
+									alt="add_node"
+								/>
+							</li>
+							<li class="list-group-item">
+								<i class="fas fa-plus"></i> Nhấn và kéo thả để
+								di chuyển đỉnh
+								<hr />
+								<img
+									src="./assets/images/move_node.png"
+									alt="move_node"
+								/>
+							</li>
+							<li class="list-group-item">
+								<i class="fas fa-plus"></i> Chuột phải để xem
+								một số tùy chọn
+								<hr />
+								<img
+									src="./assets/images/options.png"
+									alt="options"
+								/>
+							</li>
+							<li class="list-group-item">
+								<i class="fas fa-plus"></i> Chọn vào cung ở giao
+								diện đồ họa và kéo trái phải để thay đổi độ cong
+								<hr />
+								<img
+									src="./assets/images/curve_edge.png"
+									alt="curve_edge"
+								/>
+							</li>
+							<li class="list-group-item">
+								<i class="fas fa-plus"></i> Bấm chọn vào một
+								cung trong danh sách cung để xóa nó
+								<hr />
+								<img
+									src="./assets/images/delete_edge.png"
+									alt="delete_edge"
+								/>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
