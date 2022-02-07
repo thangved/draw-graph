@@ -2,7 +2,7 @@ import Graph from "graph-board";
 import openContextMenu from "./context";
 import toast from "./toast";
 
-export default function core() {
+export default function core(onchange) {
 	const g = new Graph({
 		directed: false,
 		showDistance: false,
@@ -279,7 +279,5 @@ export default function core() {
 		g.setMotion(!g.motion);
 	};
 
-	updateData();
-	setInterval(updateData, 1000);
-	return g;
+	return { graph: g, onchange: updateData };
 }

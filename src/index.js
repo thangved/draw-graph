@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import toast from "./toast";
 
 const g = core();
-const socket = socketClient(g);
+const socket = socketClient(g.graph, g.onchange);
 
 if (!JSON.parse(localStorage.getItem("intro_showed") || "false")) {
 	intro();

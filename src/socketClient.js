@@ -2,10 +2,12 @@ const Graph = require("graph-board");
 import { io } from "socket.io-client";
 import toast from "./toast";
 
-export default function socketClient(graph = new Graph()) {
+export default function socketClient(graph = new Graph(), onchange) {
 	const socket = io("https://draw-graph.herokuapp.com");
 	// const socket = io();
 	const id = Math.random().toString(36).slice(4).toUpperCase();
+
+	graph.onchange = onchange;
 
 	socket.on(`subscribe ${id}`, (clientId) => {
 		socket.emit("change graph", { id, graph });
@@ -27,7 +29,10 @@ export default function socketClient(graph = new Graph()) {
 
 	return {
 		getId() {
-			graph.onchange = () => socket.emit("change graph", { id, graph });
+			graph.onchange = () => {
+				onchange();
+				socket.emit("change graph", { id, graph });
+			};
 			return id;
 		},
 		connect(providerId, callback) {
