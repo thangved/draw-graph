@@ -60,9 +60,9 @@ connectButton.onclick = () => {
 		});
 
 		document.getElementById("canvas").classList.add("full");
-		g.appendTo("#canvas");
+		g.graph.appendTo("#canvas");
 
-		g.board.canvas.ondblclick = () => {
+		g.graph.board.canvas.ondblclick = () => {
 			toast({
 				message:
 					"Bạn không thể chỉnh sửa, để thoát chế độ này hãy reload lại trang web",
@@ -70,7 +70,7 @@ connectButton.onclick = () => {
 				type: "bg-warning",
 			});
 		};
-		g.board.canvas.onmousemove = () => {};
+		g.graph.board.canvas.onmousemove = () => {};
 		document.title += " [View Only]";
 	});
 };
