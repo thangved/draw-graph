@@ -16,6 +16,15 @@ export default function core(onchange) {
 	let searchData = [];
 	let showConnected = false;
 
+	g.addNode(1);
+	g.addNode(2);
+	g.addNode(3);
+	g.addNode(4);
+
+	g.addEdge(1, 2);
+	g.addEdge(2, 3);
+	g.addEdge(3, 4);
+
 	g.appendTo("#canvas");
 
 	const edgesComponent = document.getElementById("edges");
@@ -137,7 +146,16 @@ export default function core(onchange) {
 		const result = firstSearch.querySelector("#edges");
 		result.innerHTML = ``;
 
+		const graph = new Graph({
+			...g,
+			directed: true,
+			showGrid: false,
+		});
+		graph.appendTo("#searchCanvas");
+		g.nodes.forEach((node) => graph.addNode(node.label, node.x, node.y));
+
 		data.steps.forEach((e, index) => {
+			graph.addEdge(e.from, e.to);
 			result.innerHTML += `<li class="edge list-group-item ${
 				searchStep === index ? "active" : ""
 			}">
