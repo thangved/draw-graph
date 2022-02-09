@@ -18,6 +18,16 @@ export default function core(onchange) {
 
 	g.appendTo("#canvas");
 
+	g.addNode(1);
+	g.addNode(2);
+	g.addNode(3);
+	g.addNode(4);
+
+	g.addEdge(1, 2);
+	g.addEdge(2, 3);
+	g.addEdge(3, 1);
+	g.addEdge(3, 4);
+
 	const edgesComponent = document.getElementById("edges");
 	const firstSearch = document.getElementById("firstSearch");
 
@@ -180,8 +190,28 @@ export default function core(onchange) {
 
 	function updateConnected() {
 		try {
-			if (showConnected) return g.tarjanStart();
-			g.tarjanStop();
+			if (!showConnected) return g.tarjanStop();
+			const tarjans = g.tarjan();
+
+			const graph = new Graph({
+				directed: true,
+				character: g.character,
+				motion: g.motion,
+			});
+
+			g.nodes.forEach((e, index) => graph.addNode(index + 1, e.x, e.y));
+			tarjans.forEach((connections) => {
+				connections.forEach((connection) => {
+					const neighbours = g.neighbours(connection);
+					neighbours.forEach((node) => {
+						if (connections.includes(node))
+							graph.addEdge(connection, node);
+					});
+				});
+			});
+			graph.appendTo("#connectionCanvas");
+
+			g.tarjanStart();
 		} catch {
 			toast({
 				message: "Chưa vẽ đồ thị rồi lấy gì mà tìm : )",
