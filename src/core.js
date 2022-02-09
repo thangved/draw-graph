@@ -2,7 +2,7 @@ import Graph from "graph-board";
 import openContextMenu from "./context";
 import toast from "./toast";
 
-export default function core(onchange) {
+export default function core() {
 	const g = new Graph({
 		directed: false,
 		showDistance: false,
@@ -17,16 +17,6 @@ export default function core(onchange) {
 	let showConnected = false;
 
 	g.appendTo("#canvas");
-
-	g.addNode(1);
-	g.addNode(2);
-	g.addNode(3);
-	g.addNode(4);
-
-	g.addEdge(1, 2);
-	g.addEdge(2, 3);
-	g.addEdge(3, 1);
-	g.addEdge(3, 4);
 
 	const edgesComponent = document.getElementById("edges");
 	const firstSearch = document.getElementById("firstSearch");
