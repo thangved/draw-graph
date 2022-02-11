@@ -1,3 +1,4 @@
+clear
 sh ./build.sh
 git add .
 git commit -m "update"
