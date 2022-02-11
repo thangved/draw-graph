@@ -1051,10 +1051,10 @@ graceful-fs@^4.1.2, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
-graph-board@^1.1.19:
-  version "1.1.19"
-  resolved "https://registry.yarnpkg.com/graph-board/-/graph-board-1.1.19.tgz#6e98ce3786c113417885aca715ecf2fc12b22697"
-  integrity sha512-gOTAY++ydsx+2vqphlYRBx9zb4uKm9r42mPrwgP4XwyLbv8zpBC/6uHMOoNIm9TAtP9CX65y9gaGH1pZKOB0Gw==
+graph-board@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.yarnpkg.com/graph-board/-/graph-board-1.1.20.tgz#3c3568a11ebd38b6bbc85074f7f32cdf7de5d7cf"
+  integrity sha512-0lhOXwS0Gtp2Hf1MLnbKoxYMTJAlme/xeaEmY9ncz5LhxQ6nKe7oU88ppoDuuMcXDq4eqI2jYgP9XDWoIMN3sg==
   dependencies:
     path "^0.12.7"
     stack-structure "^1.0.2"
