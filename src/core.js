@@ -308,5 +308,30 @@ export default function core() {
 		g.setMotion(!g.motion);
 	};
 
+	const stdin = document.getElementById("stdin");
+	const stdinButton = stdin.querySelector("button");
+	const stdinTextInput = stdin.querySelector("textarea");
+
+	stdinButton.onclick = () => {
+		const { value } = stdinTextInput;
+
+		g.nodes = [];
+		g.edges = [];
+
+		for (let i = 1; i <= findMax(value); i++) g.addNode(i);
+
+		getEdges(value).forEach((e) => g.addEdge(e[0], e[1]));
+
+		function findMax(value = "") {
+			return Math.max(...value.split(/[\s\n]/).map((e) => parseInt(e)));
+		}
+
+		function getEdges(value = "") {
+			return value
+				.split("\n")
+				.map((e) => e.split(" ").map((e) => parseInt(e)));
+		}
+	};
+
 	return { graph: g, onchange: updateData };
 }
