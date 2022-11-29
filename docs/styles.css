@@ -15,7 +15,7 @@ body {
 }
 
 #canvas {
-  box-shadow: 10px 0 20px #00000020;
+  box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1254901961);
   width: 50%;
   height: 100vh;
   overflow: hidden;
@@ -61,7 +61,7 @@ body {
 
 .basic {
   width: 100%;
-  box-shadow: 0 10px 10px #00000020;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1254901961);
   min-height: 100vh;
 }
 
@@ -100,7 +100,6 @@ body {
   #canvas {
     width: 100%;
   }
-
   #details {
     width: 100%;
     height: auto;
